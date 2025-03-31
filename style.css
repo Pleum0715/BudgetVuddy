@@ -1,0 +1,99 @@
+/* Custom styles for saving page */
+.saving-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.progress {
+    height: 10px;
+    border-radius: 5px;
+    background-color: #e2e8f0;
+}
+
+.progress-bar {
+    border-radius: 5px;
+    background: linear-gradient(90deg, #4fd1c5 0%, #38b2ac 100%);
+    transition: width 0.6s ease;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.saving-goal-card {
+    animation: fadeIn 0.5s ease forwards;
+    opacity: 0;
+}
+
+/* เพิ่มความล่าช้าในการแสดงผลการ์ด */
+.saving-goal-card:nth-child(1) { animation-delay: 0.1s; }
+.saving-goal-card:nth-child(2) { animation-delay: 0.2s; }
+.saving-goal-card:nth-child(3) { animation-delay: 0.3s; }
+.saving-goal-card:nth-child(4) { animation-delay: 0.4s; }
+.saving-goal-card:nth-child(5) { animation-delay: 0.5s; }
+/* Profile Styles */
+.toggle-checkbox:checked {
+    right: 0;
+    transform: translateX(100%);
+    border-color: #6366f1;
+  }
+  
+  .toggle-checkbox:checked + .toggle-label {
+    background-color: #6366f1;
+  }
+  
+  .profile-tab {
+    transition: all 0.3s ease;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+  }
+  
+  .profile-tab:hover {
+    color: #6366f1;
+  }
+  
+  /* Animation */
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-in-out forwards;
+  }
+  
+  .delay-100 {
+    animation-delay: 0.1s;
+  }
+  
+  .delay-200 {
+    animation-delay: 0.2s;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

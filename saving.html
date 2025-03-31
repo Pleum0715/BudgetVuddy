@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบออมเงิน - BudgetBuddy</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Animate.css -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container my-5">
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="saving-icon">
+                        <i class="fas fa-piggy-bank fa-lg"></i>
+                    </div>
+                    <div>
+                        <h2 class="h3 mb-0">ระบบออมเงิน</h2>
+                        <p class="text-muted mb-0">ติดตามและบริหารเป้าหมายการออมของคุณ</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ส่วนฟอร์มเพิ่มเป้าหมาย -->
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header bg-white">
+                <h3 class="h5 mb-0"><i class="fas fa-plus-circle me-2 text-primary"></i>เพิ่มเป้าหมายใหม่</h3>
+            </div>
+            <div class="card-body">
+                <form id="add-saving-goal-form">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="goal-name" class="form-label">ชื่อเป้าหมาย</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-bullseye"></i></span>
+                                <input type="text" class="form-control" id="goal-name" placeholder="เช่น ซื้อบ้านหลังใหม่, เรียนต่อต่างประเทศ" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="target-amount" class="form-label">จำนวนเงินเป้าหมาย</label>
+                            <div class="input-group">
+                                <span class="input-group-text">฿</span>
+                                <input type="number" class="form-control" id="target-amount" min="1" placeholder="เช่น 500000" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="target-date" class="form-label">วันที่ต้องการบรรลุเป้าหมาย</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                                <input type="date" class="form-control" id="target-date" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="initial-amount" class="form-label">จำนวนเงินที่มีอยู่แล้ว</label>
+                            <div class="input-group">
+                                <span class="input-group-text">฿</span>
+                                <input type="number" class="form-control" id="initial-amount" min="0" value="0" placeholder="เช่น 50000">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-2"></i>บันทึกเป้าหมาย
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- ส่วนแสดงผลเป้าหมาย -->
+        <div class="card shadow-sm">
+            <div class="card-header bg-white">
+                <h3 class="h5 mb-0"><i class="fas fa-bullseye me-2 text-primary"></i>เป้าหมายการออมของฉัน</h3>
+            </div>
+            <div class="card-body">
+                <div id="alerts-container"></div>
+                <div id="saving-goals-container" class="row g-3">
+                    <!-- เป้าหมายจะถูกแสดงที่นี่โดย JavaScript -->
+                </div>
+                
+                <!-- กราฟิก -->
+                <div class="row mt-5">
+                    <div class="col-md-6">
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-white">
+                                <h3 class="h5 mb-0"><i class="fas fa-chart-bar me-2 text-primary"></i>ความคืบหน้าการออม</h3>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="savingChart" height="250"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-white">
+                                <h3 class="h5 mb-0"><i class="fas fa-chart-pie me-2 text-primary"></i>สัดส่วนการออม</h3>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="savingPieChart" height="250"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="saving.js"></script>
+    
+    <!-- เรียกใช้ฟังก์ชันเมื่อ DOM พร้อม -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // ตั้งค่าฟอร์มเพิ่มเป้าหมาย
+            const addGoalForm = document.getElementById('add-saving-goal-form');
+            if (addGoalForm) {
+                addGoalForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    handleAddSavingGoal(e);
+                });
+            }
+            
+            // โหลดและแสดงเป้าหมายที่มีอยู่
+            loadSavingGoals();
+        });
+    </script>
+</body>
+</html>

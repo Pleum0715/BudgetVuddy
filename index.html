@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="th" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BudgetBuddy - ระบบจัดการการเงินส่วนบุคคล</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="assets/logo-icon.svg">
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <!-- Navigation -->
+    <nav class="bg-white dark:bg-gray-800 shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <img src="file:///C:/Users/NAI/Downloads/Screenshot_2025-03-16_175112-removebg-preview.png" alt="Logo" class="h-8 w-8">
+                    <span class="ml-2 text-xl font-bold text-indigo-600 dark:text-indigo-400">BudgetBuddy</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-indigo-600 dark:text-indigo-400 font-medium">หน้าแรก</a>
+                    <a href="saving.html" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition">การออม</a>
+                    <a href="investment.html" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition">การลงทุน</a>
+                    <a href="stocks.html" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition">ตลาดหุ้น</a>
+                    <a href="chat.html" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition">AI Assistant</a>
+                    
+                    <!-- Theme Toggle -->
+                    <button id="theme-toggle" class="p-2 rounded-full focus:outline-none">
+                        <i class="fas fa-moon text-gray-700 dark:text-yellow-300"></i>
+                    </button>
+                    
+                    <!-- User Profile -->
+                    <div class="relative">
+                        <button id="user-menu" class="flex items-center focus:outline-none">
+                            <img src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff" alt="User" class="h-8 w-8 rounded-full">
+                        </button>
+                        <div id="user-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 z-50">
+                            <a href="profile.html" class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">โปรไฟล์</a>
+                            <a href="#" id="logout-btn" class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">ออกจากระบบ</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="p-2 focus:outline-none">
+                        <i class="fas fa-bars text-gray-700 dark:text-gray-300"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-800 pb-3 px-4">
+            <a href="index.html" class="block py-2 text-indigo-600 dark:text-indigo-400 font-medium">หน้าแรก</a>
+            <a href="saving.html" class="block py-2 text-gray-700 dark:text-gray-300">การออม</a>
+            <a href="investment.html" class="block py-2 text-gray-700 dark:text-gray-300">การลงทุน</a>
+            <a href="stocks.html" class="block py-2 text-gray-700 dark:text-gray-300">ตลาดหุ้น</a>
+            <a href="chat.html" class="block py-2 text-gray-700 dark:text-gray-300">AI Assistant</a>
+            <div class="pt-2 border-t border-gray-200 dark:border-gray-700">
+                <button id="theme-toggle-mobile" class="w-full flex items-center py-2 text-gray-700 dark:text-gray-300">
+                    <i class="fas fa-moon mr-2"></i> เปลี่ยนโหมด
+                </button>
+                <a href="profile.html" class="block py-2 text-gray-700 dark:text-gray-300">โปรไฟล์</a>
+                <a href="#" id="logout-btn-mobile" class="block py-2 text-gray-700 dark:text-gray-300">ออกจากระบบ</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6 animate-fade-in">จัดการการเงินอย่างชาญฉลาด</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto animate-fade-in delay-100">BudgetBuddy ช่วยคุณวางแผนการเงิน ลงทุนอย่างมีประสิทธิภาพ และบรรลุเป้าหมายทางการเงิน</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in delay-200">
+                <a href="saving.html" class="bg-white text-indigo-600 hover:bg-gray-100 px-6 py-3 rounded-lg font-medium shadow-lg transform hover:scale-105 transition duration-300">
+                    <i class="fas fa-piggy-bank mr-2"></i>เริ่มออมเงิน
+                </a>
+                <a href="investment.html" class="bg-indigo-700 hover:bg-indigo-800 px-6 py-3 rounded-lg font-medium shadow-lg transform hover:scale-105 transition duration-300">
+                    <i class="fas fa-chart-line mr-2"></i>วางแผนลงทุน
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16 bg-white dark:bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">คุณสมบัติหลัก</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+                    <div class="bg-indigo-100 dark:bg-indigo-900 w-14 h-14 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-bullseye text-indigo-600 dark:text-indigo-300 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">ติดตามเป้าหมายการออม</h3>
+                    <p class="text-gray-600 dark:text-gray-300">ตั้งค่าและติดตามเป้าหมายการออมเงินของคุณ พร้อมวิเคราะห์ความคืบหน้าแบบเรียลไทม์</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+                    <div class="bg-indigo-100 dark:bg-indigo-900 w-14 h-14 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-chart-pie text-indigo-600 dark:text-indigo-300 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">เครื่องคำนวณการลงทุน</h3>
+                    <p class="text-gray-600 dark:text-gray-300">คำนวณผลตอบแทนจากการลงทุนแบบต่างๆ ทั้งดอกเบี้ยทบต้น กองทุน SIP และแผนเกษียณ</p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+                    <div class="bg-indigo-100 dark:bg-indigo-900 w-14 h-14 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-robot text-indigo-600 dark:text-indigo-300 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">ที่ปรึกษาการเงิน AI</h3>
+                    <p class="text-gray-600 dark:text-gray-300">ปรึกษาปัญหาการเงินกับ AI Assistant ที่พร้อมให้คำแนะนำตลอด 24 ชั่วโมง</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="bg-indigo-50 dark:bg-gray-700 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">พร้อมเริ่มต้นการเดินทางทางการเงินของคุณแล้วหรือยัง?</h2>
+            <p class="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">BudgetBuddy ช่วยคุณจัดการการเงินอย่างมีประสิทธิภาพในทุกขั้นตอน</p>
+            <a href="register.html" class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-4 rounded-lg font-medium shadow-lg inline-block transform hover:scale-105 transition duration-300">
+                สมัครสมาชิกฟรี
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">BudgetBuddy</h3>
+                    <p class="text-gray-400">เครื่องมือจัดการการเงินส่วนบุคคลที่ครบวงจรที่สุด</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">เมนูหลัก</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition">หน้าแรก</a></li>
+                        <li><a href="saving.html" class="text-gray-400 hover:text-white transition">การออม</a></li>
+                        <li><a href="investment.html" class="text-gray-400 hover:text-white transition">การลงทุน</a></li>
+                        <li><a href="stocks.html" class="text-gray-400 hover:text-white transition">ตลาดหุ้น</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">ช่วยเหลือ</h3>
+                    <ul class="space-y-2">
+                        <li><a href="faq.html" class="text-gray-400 hover:text-white transition">คำถามที่พบบ่อย</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white transition">ติดต่อเรา</a></li>
+                        <li><a href="privacy.html" class="text-gray-400 hover:text-white transition">นโยบายความเป็นส่วนตัว</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">ติดตามเรา</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-line"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>© 2023 BudgetBuddy. สงวนลิขสิทธิ์ทุกประการ</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="theme.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

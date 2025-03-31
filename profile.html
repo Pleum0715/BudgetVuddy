@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="th" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>โปรไฟล์ - BudgetBuddy</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="assets/logo-icon.svg">
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <!-- Navigation -->
+    <nav class="bg-white dark:bg-gray-800 shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <img src="assets/logo.png" alt="Logo" class="h-8 w-8">
+                    <span class="ml-2 text-xl font-bold text-indigo-600 dark:text-indigo-400">BudgetBuddy</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition">หน้าแรก</a>
+                    <a href="saving.html" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition">การออม</a>
+                    <a href="investment.html" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition">การลงทุน</a>
+                    <a href="stocks.html" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition">ตลาดหุ้น</a>
+                    <a href="chat.html" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition">AI Assistant</a>
+                    
+                    <!-- Theme Toggle -->
+                    <button id="theme-toggle" class="p-2 rounded-full focus:outline-none">
+                        <i class="fas fa-moon text-gray-700 dark:text-yellow-300"></i>
+                    </button>
+                    
+                    <!-- User Profile -->
+                    <div class="relative">
+                        <button id="user-menu" class="flex items-center focus:outline-none">
+                            <img id="nav-profile-pic" src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff" alt="User" class="h-8 w-8 rounded-full">
+                        </button>
+                        <div id="user-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 z-50">
+                            <a href="profile.html" class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">โปรไฟล์</a>
+                            <a href="#" id="logout-btn" class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">ออกจากระบบ</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="p-2 focus:outline-none">
+                        <i class="fas fa-bars text-gray-700 dark:text-gray-300"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-800 pb-3 px-4">
+            <a href="index.html" class="block py-2 text-gray-700 dark:text-gray-300">หน้าแรก</a>
+            <a href="saving.html" class="block py-2 text-gray-700 dark:text-gray-300">การออม</a>
+            <a href="investment.html" class="block py-2 text-gray-700 dark:text-gray-300">การลงทุน</a>
+            <a href="stocks.html" class="block py-2 text-gray-700 dark:text-gray-300">ตลาดหุ้น</a>
+            <a href="chat.html" class="block py-2 text-gray-700 dark:text-gray-300">AI Assistant</a>
+            <div class="pt-2 border-t border-gray-200 dark:border-gray-700">
+                <button id="theme-toggle-mobile" class="w-full flex items-center py-2 text-gray-700 dark:text-gray-300">
+                    <i class="fas fa-moon mr-2"></i> เปลี่ยนโหมด
+                </button>
+                <a href="profile.html" class="block py-2 text-gray-700 dark:text-gray-300">โปรไฟล์</a>
+                <a href="#" id="logout-btn-mobile" class="block py-2 text-gray-700 dark:text-gray-300">ออกจากระบบ</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Profile Section -->
+    <section class="py-12 bg-white dark:bg-gray-800">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-700 shadow-md rounded-xl overflow-hidden">
+                <!-- Profile Header -->
+                <div class="bg-gradient-to-r from-indigo-500 to-purple-600 px-6 py-10 relative">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="relative">
+                            <img id="profile-image" src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff" alt="Profile Picture" class="w-24 h-24 rounded-full border-4 border-white">
+                            <label for="profile-pic-input" class="absolute bottom-0 right-0 w-8 h-8 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full flex items-center justify-center cursor-pointer">
+                                <i class="fas fa-camera"></i>
+                                <input id="profile-pic-input" type="file" class="hidden" accept="image/*">
+                            </label>
+                        </div>
+                        <div class="md:ml-6 mt-4 md:mt-0 text-center md:text-left">
+                            <h1 id="display-name" class="text-2xl font-bold text-white">ชื่อผู้ใช้</h1>
+                            <p id="display-email" class="text-indigo-100">user@example.com</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Profile Tabs -->
+                <div class="px-4 py-4 bg-gray-50 dark:bg-gray-800 border-b dark:border-gray-600">
+                    <div class="flex overflow-x-auto">
+                        <button class="profile-tab text-indigo-600 dark:text-indigo-400 border-b-2 border-indigo-600 dark:border-indigo-400 px-4 py-2 mr-2 font-medium" data-tab="personal-info">ข้อมูลส่วนตัว</button>
+                        <button class="profile-tab text-gray-500 dark:text-gray-300 px-4 py-2 mr-2 font-medium" data-tab="financial-goals">เป้าหมายการเงิน</button>
+                        <button class="profile-tab text-gray-500 dark:text-gray-300 px-4 py-2 mr-2 font-medium" data-tab="account-settings">ตั้งค่าบัญชี</button>
+                    </div>
+                </div>
+                
+                <!-- Profile Content -->
+                <div class="px-6 py-6">
+                    <!-- Personal Info Tab -->
+                    <div id="personal-info" class="profile-content">
+                        <form id="profile-form">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="firstname" class="block text-sm font-medium text-gray-700 dark:text-gray-300">ชื่อ</label>
+                                    <input type="text" id="firstname" name="firstname" class="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100">
+                                </div>
+                                <div>
+                                    <label for="lastname" class="block text-sm font-medium text-gray-700 dark:text-gray-300">นามสกุล</label>
+                                    <input type="text" id="lastname" name="lastname" class="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100">
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">อีเมล</label>
+                                    <input type="email" id="email" name="email" class="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100">
+                                </div>
+                                <div>
+                                    <label for="phone" class="block text-sm font-medium text-gray-700 dark:text-gray-300">เบอร์โทรศัพท์</label>
+                                    <input type="tel" id="phone" name="phone" class="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100">
+                                </div>
+                                <div class="md:col-span-2">
+                                    <label for="bio" class="block text-sm font-medium text-gray-700 dark:text-gray-300">เกี่ยวกับฉัน</label>
+                                    <textarea id="bio" name="bio" rows="3" class="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"></textarea>
+                                </div>
+                            </div>
+                            <div class="mt-6">
+                                <button type="submit" id="save-profile" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md font-medium shadow-sm">บันทึกข้อมูล</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Financial Goals Tab -->
+                    <div id="financial-goals" class="profile-content hidden">
+                        <div class="space-y-6">
+                            <!-- Goal Progress Cards -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <!-- Savings Goal -->
+                                <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <h3 class="text-lg font-medium text-gray-900 dark:text-white">เป้าหมายการออม</h3>
+                                        <span class="text-sm font-medium text-indigo-600 dark:text-indigo-400">65%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2.5">
+                                        <div class="bg-indigo-600 h-2.5 rounded-full" style="width: 65%"></div>
+                                    </div>
+                                    <div class="mt-2 text-sm text-gray-500 dark:text-gray-400">
+                                        <span>฿32,500 จาก ฿50,000</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Investment Goal -->
+                                <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <h3 class="text-lg font-medium text-gray-900 dark:text-white">เป้าหมายการลงทุน</h3>
+                                        <span class="text-sm font-medium text-indigo-600 dark:text-indigo-400">40%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2.5">
+                                        <div class="bg-indigo-600 h-2.5 rounded-full" style="width: 40%"></div>
+                                    </div>
+                                    <div class="mt-2 text-sm text-gray-500 dark:text-gray-400">
+                                        <span>฿40,000 จาก ฿100,000</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Add New Goal Form -->
+                            <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
+                                <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">เพิ่มเป้าหมายใหม่</h3>
+                                <form id="goals-form">
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div>
+                                            <label for="goal-name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">ชื่อเป้าหมาย</label>
+                                            <input type="text" id="goal-name" class="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100">
+                                        </div>
+                                        <div>
+                                            <label for="goal-type" class="block text-sm font-medium text-gray-700 dark:text-gray-300">ประเภท</label>
+                                            <select id="goal-type" class="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100">
+                                                <option value="saving">การออม</option>
+                                                <option value="investment">การลงทุน</option>
+                                                <option value="debt">ชำระหนี้</option>
+                                                <option value="other">อื่นๆ</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label for="goal-amount" class="block text-sm font-medium text-gray-700 dark:text-gray-300">จำนวนเงินเป้าหมาย (บาท)</label>
+                                            <input type="number" id="goal-amount" class="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100">
+                                        </div>
+                                        <div>
+                                            <label for="goal-date" class="block text-sm font-medium text-gray-700 dark:text-gray-300">วันที่ต้องการบรรลุเป้าหมาย</label>
+                                            <input type="date" id="goal-date" class="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100">
+                                        </div>
+                                    </div>
+                                    <div class="mt-4">
+                                        <button type="submit" id="add-goal" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md font-medium shadow-sm">เพิ่มเป้าหมาย</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Account Settings Tab -->
+                    <div id="account-settings" class="profile-content hidden">
+                        <div class="space-y-6">
+                            <!-- Change Password -->
+                            <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
+                                <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">เปลี่ยนรหัสผ่าน</h3>
+                                <form id="password-form">
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label for="current-password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">รหัสผ่านปัจจุบัน</label>
+                                            <input type="password" id="current-password" class="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100">
+                                        </div>
+                                        <div>
+                                            <label for="new-password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">รหัสผ่านใหม่</label>
+                                            <input type="password" id="new-password" class="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100">
+                                        </div>
+                                        <div>
+                                            <label for="confirm-password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">ยืนยันรหัสผ่านใหม่</label>
+                                            <input type="password" id="confirm-password" class="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100">
+                                        </div>
+                                    </div>
+                                    <div class="mt-4">
+                                        <button type="submit" id="change-password" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md font-medium shadow-sm">เปลี่ยนรหัสผ่าน</button>
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <!-- Notification Settings -->
+                            <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
+                                <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">การแจ้งเตือน</h3>
+                                <div class="space-y-3">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-gray-700 dark:text-gray-300">อีเมล์แจ้งเตือน</span>
+                                        <div class="relative inline-block w-10 mr-2 align-middle select-none">
+                                            <input type="checkbox" id="toggle-email" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer transition-transform duration-200 ease-in"/>
+                                            <label for="toggle-email" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 dark:bg-gray-600 cursor-pointer"></label>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-gray-700 dark:text-gray-300">แจ้งเตือนเป้าหมายใกล้สำเร็จ</span>
+                                        <div class="relative inline-block w-10 mr-2 align-middle select-none">
+                                            <input type="checkbox" id="toggle-goals" checked class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer transition-transform duration-200 ease-in"/>
+                                            <label for="toggle-goals" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 dark:bg-gray-600 cursor-pointer"></label>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-gray-700 dark:text-gray-300">แจ้งเตือนข่าวสารและโปรโมชัน</span>
+                                        <div class="relative inline-block w-10 mr-2 align-middle select-none">
+                                            <input type="checkbox" id="toggle-news" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer transition-transform duration-200 ease-in"/>
+                                            <label for="toggle-news" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 dark:bg-gray-600 cursor-pointer"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-4">
+                                    <button id="save-notifications" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md font-medium shadow-sm">บันทึกการตั้งค่า</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Delete Account -->
+                            <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
+                                <h3 class="text-lg font-medium text-red-600 dark:text-red-400 mb-2">ลบบัญชีผู้ใช้</h3>
+                                <p class="text-gray-500 dark:text-gray-400 mb-4">การลบบัญชีผู้ใช้จะไม่สามารถกู้คืนได้ ข้อมูลทั้งหมดของคุณจะถูกลบออกจากระบบ</p>
+                                <button id="delete-account" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md font-medium shadow-sm">ลบบัญชีผู้ใช้</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">BudgetBuddy</h3>
+                    <p class="text-gray-400">เครื่องมือจัดการการเงินส่วนบุคคลที่ครบวงจรที่สุด</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">เมนูหลัก</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition">หน้าแรก</a></li>
+                        <li><a href="saving.html" class="text-gray-400 hover:text-white transition">การออม</a></li>
+                        <li><a href="investment.html" class="text-gray-400 hover:text-white transition">การลงทุน</a></li>
+                        <li><a href="stocks.html" class="text-gray-400 hover:text-white transition">ตลาดหุ้น</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">ช่วยเหลือ</h3>
+                    <ul class="space-y-2">
+                        <li><a href="faq.html" class="text-gray-400 hover:text-white transition">คำถามที่พบบ่อย</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white transition">ติดต่อเรา</a></li>
+                        <li><a href="privacy.html" class="text-gray-400 hover:text-white transition">นโยบายความเป็นส่วนตัว</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">ติดตามเรา</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-line"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>© 2023 BudgetBuddy. สงวนลิขสิทธิ์ทุกประการ</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="theme.js"></script>
+    <script src="app.js"></script>
+    <script src="profile.js"></script>
+</body>
+</html>

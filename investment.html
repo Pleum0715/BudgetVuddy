@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BudgetBuddy - การวางแผนการลงทุน</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="fas fa-wallet me-2"></i>BudgetBuddy
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">หน้าแรก</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="saving.html">การออม</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="stocks.html">ตลาดหุ้น</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="investment.html">การลงทุน</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="chat.html">แชทกับ AI</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="login-btn">เข้าสู่ระบบ</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-white">
+                        <h2 class="h4 mb-0">
+                            <i class="fas fa-coins me-2 text-warning"></i>เครื่องคำนวณการลงทุน
+                        </h2>
+                    </div>
+                    <div class="card-body">
+                        <ul class="nav nav-tabs mb-4" id="investmentTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="compound-tab" data-bs-toggle="tab" data-bs-target="#compound" type="button" role="tab">
+                                    ดอกเบี้ยทบต้น
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="retirement-tab" data-bs-toggle="tab" data-bs-target="#retirement" type="button" role="tab">
+                                    วางแผนเกษียณ
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="sip-tab" data-bs-toggle="tab" data-bs-target="#sip" type="button" role="tab">
+                                    ลงทุนแบบ SIP
+                                </button>
+                            </li>
+                        </ul>
+                        
+                        <div class="tab-content" id="investmentTabsContent">
+                            <!-- แท็บดอกเบี้ยทบต้น -->
+                            <div class="tab-pane fade show active" id="compound" role="tabpanel">
+                                <form id="compound-form">
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="initial-amount" class="form-label">จำนวนเงินเริ่มต้น (บาท)</label>
+                                            <input type="number" class="form-control" id="initial-amount" value="100000">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="monthly-add" class="form-label">เพิ่มเงินทุกเดือน (บาท)</label>
+                                            <input type="number" class="form-control" id="monthly-add" value="10000">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="years" class="form-label">ระยะเวลา (ปี)</label>
+                                            <input type="number" class="form-control" id="years" value="10">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="return-rate" class="form-label">อัตราผลตอบแทนต่อปี (%)</label>
+                                            <input type="number" step="0.1" class="form-control" id="return-rate" value="8">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="compound-freq" class="form-label">ความถี่ทบต้น</label>
+                                            <select class="form-select" id="compound-freq">
+                                                <option value="1">ปีละครั้ง</option>
+                                                <option value="2">ปีละ 2 ครั้ง</option>
+                                                <option value="4">ปีละ 4 ครั้ง (ไตรมาส)</option>
+                                                <option value="12" selected>ปีละ 12 ครั้ง (เดือน)</option>
+                                                <option value="365">ปีละ 365 ครั้ง (วัน)</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="inflation-rate" class="form-label">อัตราเงินเฟ้อต่อปี (%)</label>
+                                            <input type="number" step="0.1" class="form-control" id="inflation-rate" value="3">
+                                        </div>
+                                    </div>
+                                    <div class="d-grid">
+                                        <button type="button" id="calculate-compound" class="btn btn-primary">
+                                            <i class="fas fa-calculator me-2"></i>คำนวณ
+                                        </button>
+                                    </div>
+                                </form>
+                                
+                                <div class="results mt-4" id="compound-results" style="display: none;">
+                                    <h4 class="h5 mb-3">ผลลัพธ์การคำนวณ</h4>
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <p class="mb-1">มูลค่าในอนาคต (รวมเงินฝาก):</p>
+                                                    <h3 class="text-success" id="future-value">0 บาท</h3>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p class="mb-1">มูลค่าในปัจจุบัน (คิดเงินเฟ้อ):</p>
+                                                    <h3 class="text-primary" id="present-value">0 บาท</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">กราฟแสดงการเติบโตของการลงทุน</h5>
+                                            <canvas id="compound-chart" height="200"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- แท็บวางแผนเกษียณ -->
+                            <div class="tab-pane fade" id="retirement" role="tabpanel">
+                                <form id="retirement-form">
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="current-age" class="form-label">อายุปัจจุบัน</label>
+                                            <input type="number" class="form-control" id="current-age" value="30">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="retire-age" class="form-label">อายุที่ต้องการเกษียณ</label>
+                                            <input type="number" class="form-control" id="retire-age" value="60">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="current-savings" class="form-label">เงินออมปัจจุบัน (บาท)</label>
+                                            <input type="number" class="form-control" id="current-savings" value="500000">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="monthly-save" class="form-label">เงินออมต่อเดือน (บาท)</label>
+                                            <input type="number" class="form-control" id="monthly-save" value="10000">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="retire-return-rate" class="form-label">อัตราผลตอบแทนต่อปี (%)</label>
+                                            <input type="number" step="0.1" class="form-control" id="retire-return-rate" value="7">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="retire-inflation-rate" class="form-label">อัตราเงินเฟ้อต่อปี (%)</label>
+                                            <input type="number" step="0.1" class="form-control" id="retire-inflation-rate" value="3">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-12">
+                                            <label for="yearly-spend" class="form-label">ค่าใช้จ่ายต่อปีหลังเกษียณ (บาท)</label>
+                                            <input type="number" class="form-control" id="yearly-spend" value="300000">
+                                        </div>
+                                    </div>
+                                    <div class="d-grid">
+                                        <button type="button" id="calculate-retirement" class="btn btn-primary">
+                                            <i class="fas fa-calculator me-2"></i>คำนวณ
+                                        </button>
+                                    </div>
+                                </form>
+                                
+                                <div class="results mt-4" id="retirement-results" style="display: none;">
+                                    <h4 class="h5 mb-3">ผลลัพธ์การคำนวณ</h4>
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <p class="mb-1">เงินออมเมื่อเกษียณ:</p>
+                                                    <h3 class="text-success" id="retirement-savings">0 บาท</h3>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p class="mb-1">เงินที่ต้องการเมื่อเกษียณ:</p>
+                                                    <h3 class="text-primary" id="required-savings">0 บาท</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">ผลการวิเคราะห์</h5>
+                                            <p id="retirement-result" class="h5 text-center"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- แท็บลงทุนแบบ SIP -->
+                            <div class="tab-pane fade" id="sip" role="tabpanel">
+                                <form id="sip-form">
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="sip-amount" class="form-label">จำนวนเงินลงทุนต่อเดือน (บาท)</label>
+                                            <input type="number" class="form-control" id="sip-amount" value="5000">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="sip-years" class="form-label">ระยะเวลาลงทุน (ปี)</label>
+                                            <input type="number" class="form-control" id="sip-years" value="10">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-12">
+                                            <label for="sip-return-rate" class="form-label">อัตราผลตอบแทนต่อปี (%)</label>
+                                            <input type="number" step="0.1" class="form-control" id="sip-return-rate" value="12">
+                                        </div>
+                                    </div>
+                                    <div class="d-grid">
+                                        <button type="button" id="calculate-sip" class="btn btn-primary">
+                                            <i class="fas fa-calculator me-2"></i>คำนวณ
+                                        </button>
+                                    </div>
+                                </form>
+                                
+                                <div class="results mt-4" id="sip-results" style="display: none;">
+                                    <h4 class="h5 mb-3">ผลลัพธ์การคำนวณ</h4>
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <p class="mb-1">มูลค่าในอนาคต:</p>
+                                                    <h3 class="text-success" id="sip-future-value">0 บาท</h3>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <p class="mb-1">เงินลงทุนทั้งหมด:</p>
+                                                    <h3 class="text-primary" id="sip-total-invested">0 บาท</h3>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <p class="mb-1">กำไรประมาณการ:</p>
+                                                    <h3 class="text-warning" id="sip-estimated-gain">0 บาท</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">กราฟแสดงการเติบโตของการลงทุน</h5>
+                                            <canvas id="sip-chart" height="200"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="investment-calculator.js"></script>
+</body>
+</html>
