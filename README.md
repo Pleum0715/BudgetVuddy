@@ -1,1 +1,1 @@
-# BudgetVuddy
+# BudgetBuddy
